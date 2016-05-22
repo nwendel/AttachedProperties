@@ -11,5 +11,17 @@
       "imports": "dnxcore50"
     },
     "net46": { }
-  }
+  },
+
+  "packOptions": {
+    "summary": "Add attached properties to existing instances",
+    "owners": [ "Niklas Wendel" ],
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/nwendel/attachedproperties"
+    },
+    "licenseUrl": "https://github.com/nwendel/attachedproperties/blob/master/LICENSE.txt"
+  },
+
+  "authors": [ "Niklas Wendel" ]
 }
