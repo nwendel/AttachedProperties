@@ -16,6 +16,7 @@
   "packOptions": {
     "summary": "Add attached properties to existing instances",
     "owners": [ "Niklas Wendel" ],
+    "tags": [ "Attached", "Properties", "Property", "AttachedProperies", "AttachedProperty" ],
     "repository": {
       "type": "git",
       "url": "https://github.com/nwendel/attachedproperties"
