@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 // Copyright (c) Niklas Wendel
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); 
@@ -17,7 +17,7 @@ namespace AttachedProperties
 {
 
     /// <summary>
-    /// 
+    /// Defines an attached property for type TOwner where the property type is TProperty.
     /// </summary>
     public class AttachedProperty<TOwner, TProperty> : AbstractAttachedProperty
     {
@@ -25,15 +25,20 @@ namespace AttachedProperties
         #region Constructor
 
         /// <summary>
-        /// 
+        /// Creates a <see cref="AttachedProperties"/> which is used to attach values to instances
+        /// in the global context.
         /// </summary>
+        /// <param name="name">Name of the attached property.</param>
         public AttachedProperty(string name) : this(name, AttachedPropertyContext.GlobalInstance)
         {
         }
 
         /// <summary>
-        /// 
+        /// Creates a <see cref="AttachedProperties"/> which is used to attach values to instances
+        /// in a specified context.
         /// </summary>
+        /// <param name="name"></param>
+        /// <param name="context"></param>
         public AttachedProperty(string name, AttachedPropertyContext context) : base(typeof(TOwner), typeof(TProperty), name, context)
         {
         }
