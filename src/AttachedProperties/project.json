@@ -21,7 +21,7 @@
       "type": "git",
       "url": "https://github.com/nwendel/attachedproperties"
     },
-    "licenseUrl": "https://github.com/nwendel/attachedproperties/blob/master/LICENSE.txt"
+    "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0"
   },
 
   "authors": [ "Niklas Wendel" ]
