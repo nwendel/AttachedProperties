@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 // Copyright (c) Niklas Wendel
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); 
@@ -20,7 +20,7 @@ namespace AttachedProperties
 {
 
     /// <summary>
-    /// 
+    /// Abstract base class used to define <see cref="AttachedProperties"/>.
     /// </summary>
     public abstract class AbstractAttachedProperty
     {
