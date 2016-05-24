@@ -13,14 +13,21 @@ Install-Package AttachedProperties
 public class Example
 {
 
-	public AttachedProperty<string, Color> TextColor = new AttachedProperty<string, Color>(nameof(Color));
+	public AttachedProperty<string, Color> ForegroundColor = new AttachedProperty<string, Color>(nameof(ForegroundColor));
     
     public void SomeMethod()
     {
     	var text = "Some value";
-        text.SetAttachedValue(TextColor, Color.White);
-        
-        var color = text.GetAttachedvalue(TextColor);
+        text.SetAttachedValue(ForegroundColor, Color.White);
+
+		WriteLineWithColor(text);
+    }
+    
+    public void WriteLineWithColor(string text)
+    {
+        var froegroundColor = text.GetAttachedvalue(ForegroundColor);
+        Console.ForegoundColor = froegroundColor;
+		Console.WriteLine(text);    	
     }
 
 }
