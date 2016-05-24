@@ -1,6 +1,6 @@
 # AttachedProperties [![Build status](https://ci.appveyor.com/api/projects/status/9l9iji73dae9j0da?svg=true)](https://ci.appveyor.com/project/nwendel/attachedproperties-py5wh)
 
-A small library for dynamically adding attached properties to any existing instance without creating a dervived type.  It works similar in nature to WPF's attached dependency properties however it can be used on any type and not just types deriving from DependencyObject.
+A small library for dynamically adding attached properties to any existing instance without creating a derived type.  It works similar in nature to WPF's attached dependency properties however it can be used on any type and not just types deriving from DependencyObject.
 
 ### NuGet Package
 
@@ -41,4 +41,4 @@ There are some situations when there is a need to add additional state to an exi
 * The creation of the instance where additional state is needed is not possible to change and there are other dependencies which are not expecting changes to the instance.
 * Where there is no wish to change the class since the attached property is just used in a very specific part of the solution.
 
-[Documentation can be found here.](https://github.com/nwendel/AttachedProperties/wiki) 
+[Documentation can be found here.](https://github.com/nwendel/AttachedProperties/wiki)
