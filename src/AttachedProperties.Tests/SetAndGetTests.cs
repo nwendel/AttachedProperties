@@ -88,6 +88,23 @@ namespace AttachedProperties.Tests
             Assert.Equal(0, properties.Count);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        [Fact]
+        public void CanGetNonObjectGetValueNoSet()
+        {
+            var tested = new AttachedPropertyContext();
+
+            var attachedProperty = new AttachedProperty<object, int>("CanGetNonObjectGetValueNoSet", tested);
+            var another = new AttachedProperty<object, int>("Another", tested);
+            var instance = new object();
+            instance.SetAttachedValue(another, 1, tested);
+            var value = instance.GetAttachedValue(attachedProperty, tested);
+
+            Assert.Equal(0, value);
+        }
+
     }
 
 }

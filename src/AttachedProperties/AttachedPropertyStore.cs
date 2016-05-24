@@ -58,11 +58,10 @@ namespace AttachedProperties
         /// <param name="instance"></param>
         /// <param name="attachedProperty"></param>
         /// <returns></returns>
-        public object GetValue(AbstractAttachedProperty attachedProperty)
+        public bool TryGetValue(AbstractAttachedProperty attachedProperty, out object value)
         {
-            object value;
-            _values.TryGetValue(attachedProperty, out value);
-            return value;
+            var found = _values.TryGetValue(attachedProperty, out value);
+            return found;
         }
 
         #endregion

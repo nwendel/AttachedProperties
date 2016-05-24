@@ -163,7 +163,12 @@ namespace AttachedProperties
                     return default(TProperty);
                 }
 
-                var value = store.GetValue(attachedProperty);
+                object value;
+                found = store.TryGetValue(attachedProperty, out value);
+                if(!found)
+                {
+                    return default(TProperty);
+                }
                 return (TProperty)value;
             }
         }
