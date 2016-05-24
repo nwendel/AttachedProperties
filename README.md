@@ -13,7 +13,8 @@ Install-Package AttachedProperties
 public class Example
 {
 
-	public AttachedProperty<string, Color> ForegroundColor = new AttachedProperty<string, Color>(nameof(ForegroundColor));
+	public AttachedProperty<string, Color> ForegroundColor =
+    			new AttachedProperty<string, Color>(nameof(ForegroundColor));
     
     public void SomeMethod()
     {
