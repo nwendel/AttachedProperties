@@ -14,7 +14,7 @@
 // limitations under the License.
 #endregion
 using System.Collections.Generic;
-using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -91,7 +91,7 @@ namespace AttachedProperties
         {
             using (new DisposableAction(() => _lock.EnterReadLock(), () => _lock.ExitReadLock()))
             {
-                return _attachedProperties.ToImmutableHashSet();
+                return new ReadOnlyCollection<AbstractAttachedProperty>(_attachedProperties.ToList());
             }
         }
 

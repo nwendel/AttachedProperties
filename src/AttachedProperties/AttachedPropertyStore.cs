@@ -15,7 +15,7 @@
 #endregion
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 
 namespace AttachedProperties
 {
@@ -40,7 +40,7 @@ namespace AttachedProperties
         /// <returns></returns>
         public IReadOnlyDictionary<AbstractAttachedProperty, object> Get()
         {
-            return _values.ToImmutableDictionary();
+            return new ReadOnlyDictionary<AbstractAttachedProperty, object>(_values);
         }
 
         #endregion
