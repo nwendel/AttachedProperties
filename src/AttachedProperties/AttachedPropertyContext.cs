@@ -35,7 +35,7 @@ namespace AttachedProperties
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
         private readonly HashSet<AbstractAttachedProperty> _attachedProperties = new HashSet<AbstractAttachedProperty>();
         private readonly ConditionalWeakTable<object, AttachedPropertyStore> _stores = new ConditionalWeakTable<object, AttachedPropertyStore>();
-        private readonly List<WeakReference> _instances = new List<WeakReference>();
+        private static readonly PropertyInfo _keysProperty = typeof(ConditionalWeakTable<object, AttachedPropertyStore>).GetTypeInfo().GetProperty("Keys", BindingFlags.Instance | BindingFlags.NonPublic);
 
         #endregion
 
@@ -110,8 +110,7 @@ namespace AttachedProperties
         {
             using (new DisposableAction(() => _lock.EnterReadLock(), () => _lock.ExitReadLock()))
             {
-                var keysProperty = _stores.GetType().GetTypeInfo().GetProperty("Keys", BindingFlags.Instance | BindingFlags.NonPublic);
-                var keys = (ICollection<object>)keysProperty.GetValue(_stores);
+                var keys = (ICollection<object>)_keysProperty.GetValue(_stores);
                 return new ReadOnlyCollection<object>(keys.ToList());
             }
         }
