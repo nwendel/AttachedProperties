@@ -41,4 +41,6 @@ There are some situations when there is a need to add additional state to an exi
 * The creation of the instance where additional state is needed is not possible to change and there are other dependencies which are not expecting changes to the instance.
 * Where there is no wish to change the class since the attached property is just used in a very specific part of the solution.
 
-[Documentation can be found here.](https://github.com/nwendel/AttachedProperties/wiki)
+### Documentation
+
+[Full documentation can be found here.](https://github.com/nwendel/AttachedProperties/wiki)
