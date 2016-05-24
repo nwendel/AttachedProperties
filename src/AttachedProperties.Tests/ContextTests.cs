@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 #endregion
+using System;
 using Xunit;
 
 namespace AttachedProperties.Tests
@@ -40,6 +41,60 @@ namespace AttachedProperties.Tests
             {
                 Assert.Same(attachedProperty, x);
             });
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Fact]
+        public void CanGetInstances()
+        {
+            var tested = new AttachedPropertyContext();
+
+            var attachedProperty = new AttachedProperty<object, int>("PropertyName", tested);
+            var instance = new object();
+            instance.SetAttachedValue(attachedProperty, 1, tested);
+            var instances = tested.GetInstances();
+
+            Assert.Equal(1, instances.Count);
+            Assert.All(instances, x =>
+            {
+                Assert.Same(instance, x);
+            });
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Fact]
+        public void CanGetInstancesNoReference()
+        {
+            var tested = new AttachedPropertyContext();
+
+            var attachedProperty = new AttachedProperty<object, int>("PropertyName", tested);
+            var instance = new object();
+            instance.SetAttachedValue(attachedProperty, 1, tested);
+            instance = null;
+            GC.Collect();
+            var instances = tested.GetInstances();
+
+            Assert.Equal(0, instances.Count);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Fact]
+        public void CanGetInstancesDefaultValue()
+        {
+            var tested = new AttachedPropertyContext();
+
+            var attachedProperty = new AttachedProperty<object, int>("PropertyName", tested);
+            var instance = new object();
+            instance.SetAttachedValue(attachedProperty, default(int), tested);
+            var instances = tested.GetInstances();
+
+            Assert.Equal(0, instances.Count);
         }
 
         /// <summary>

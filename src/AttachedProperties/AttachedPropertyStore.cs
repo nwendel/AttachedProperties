@@ -32,16 +32,21 @@ namespace AttachedProperties
 
         #endregion
 
-        #region Get
+        #region Count
 
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
-        public IReadOnlyDictionary<AbstractAttachedProperty, object> Get()
-        {
-            return new ReadOnlyDictionary<AbstractAttachedProperty, object>(_values);
-        }
+        public int Count => _values.Count;
+
+        #endregion
+
+        #region Values
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IReadOnlyDictionary<AbstractAttachedProperty, object> Values => new ReadOnlyDictionary<AbstractAttachedProperty, object>(_values);
 
         #endregion
 

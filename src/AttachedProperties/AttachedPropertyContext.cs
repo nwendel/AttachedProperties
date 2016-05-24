@@ -13,9 +13,11 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 #endregion
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading;
 
@@ -31,8 +33,9 @@ namespace AttachedProperties
         #region Fields
 
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
-        private HashSet<AbstractAttachedProperty> _attachedProperties = new HashSet<AbstractAttachedProperty>();
+        private readonly HashSet<AbstractAttachedProperty> _attachedProperties = new HashSet<AbstractAttachedProperty>();
         private readonly ConditionalWeakTable<object, AttachedPropertyStore> _stores = new ConditionalWeakTable<object, AttachedPropertyStore>();
+        private readonly List<WeakReference> _instances = new List<WeakReference>();
 
         #endregion
 
@@ -97,6 +100,24 @@ namespace AttachedProperties
 
         #endregion
 
+        #region Get Instances
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IReadOnlyCollection<object> GetInstances()
+        {
+            using (new DisposableAction(() => _lock.EnterReadLock(), () => _lock.ExitReadLock()))
+            {
+                var keysProperty = _stores.GetType().GetTypeInfo().GetProperty("Keys", BindingFlags.Instance | BindingFlags.NonPublic);
+                var keys = (ICollection<object>)keysProperty.GetValue(_stores);
+                return new ReadOnlyCollection<object>(keys.ToList());
+            }
+        }
+
+        #endregion
+
         #region Get Instance Properties
 
         /// <summary>
@@ -112,10 +133,10 @@ namespace AttachedProperties
                 var found = _stores.TryGetValue(instance, out store);
                 if (!found)
                 {
-                    return null;
+                    return new Dictionary<AbstractAttachedProperty, object>();
                 }
 
-                return store.Get();
+                return store.Values;
             }
         }
 
@@ -169,6 +190,10 @@ namespace AttachedProperties
                 if (object.Equals(value, default(TProperty)))
                 {
                     store.RemoveValue(attachedProperty);
+                    if(store.Count == 0)
+                    {
+                        _stores.Remove(instance);
+                    }
                 }
                 else
                 {
