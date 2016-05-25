@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 #endregion
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -208,12 +207,12 @@ namespace AttachedProperties
 
         #endregion
 
-        #region Global Instance
+        #region Global Context
 
         /// <summary>
         /// 
         /// </summary>
-        public static AttachedPropertyContext GlobalInstance = new AttachedPropertyContext();
+        public static AttachedPropertyContext GlobalContext = new AttachedPropertyContext();
 
         #endregion
 

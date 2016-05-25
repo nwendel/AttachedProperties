@@ -34,7 +34,7 @@ namespace AttachedProperties
         /// <returns></returns>
         public static IReadOnlyDictionary<AbstractAttachedProperty, object> GetAttachedProperties<T>(this T self)
         {
-            var attachedProperties = self.GetAttachedProperties(AttachedPropertyContext.GlobalInstance);
+            var attachedProperties = self.GetAttachedProperties(AttachedPropertyContext.GlobalContext);
             return attachedProperties;
         }
 
@@ -65,7 +65,7 @@ namespace AttachedProperties
         /// <returns></returns>
         public static TResult GetAttachedValue<T, TResult>(this T self, AttachedProperty<T, TResult> attachedProperty)
         {
-            var value = self.GetAttachedValue(attachedProperty, AttachedPropertyContext.GlobalInstance);
+            var value = self.GetAttachedValue(attachedProperty, AttachedPropertyContext.GlobalContext);
             return value;
         }
 
@@ -98,7 +98,7 @@ namespace AttachedProperties
         /// <param name="value"></param>
         public static void SetAttachedValue<T, TResult>(this T self, AttachedProperty<T, TResult> attachedProperty, TResult value)
         {
-            self.SetAttachedValue(attachedProperty, value, AttachedPropertyContext.GlobalInstance);
+            self.SetAttachedValue(attachedProperty, value, AttachedPropertyContext.GlobalContext);
         }
 
         /// <summary>

@@ -29,7 +29,7 @@ namespace AttachedProperties
         /// in the global context.
         /// </summary>
         /// <param name="name">Name of the attached property.</param>
-        public AttachedProperty(string name) : this(name, AttachedPropertyContext.GlobalInstance)
+        public AttachedProperty(string name) : this(name, AttachedPropertyContext.GlobalContext)
         {
         }
 
