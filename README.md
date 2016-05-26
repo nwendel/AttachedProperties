@@ -26,7 +26,7 @@ public class Example
     
     public void WriteLineWithColor(string text)
     {
-        var foregroundColor = text.GetAttachedvalue(ForegroundColor);
+        var foregroundColor = text.GetAttachedValue(ForegroundColor);
         Console.ForegoundColor = foregroundColor;
 		Console.WriteLine(text);    	
     }
