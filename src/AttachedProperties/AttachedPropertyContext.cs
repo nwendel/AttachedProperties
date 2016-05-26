@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 // Copyright (c) Niklas Wendel 2016
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); 
@@ -24,7 +24,8 @@ namespace AttachedProperties
 {
 
     /// <summary>
-    /// 
+    /// The context in which attached properties are defined and which is also used to set and
+    /// get attached property values.
     /// </summary>
     public class AttachedPropertyContext
     {
@@ -41,7 +42,7 @@ namespace AttachedProperties
         #region Register
 
         /// <summary>
-        /// 
+        /// Register a new attached property in this context.
         /// </summary>
         /// <param name="attachedProperty"></param>
         public void Register(AbstractAttachedProperty attachedProperty)
@@ -86,7 +87,7 @@ namespace AttachedProperties
         #region Get Properties
 
         /// <summary>
-        /// 
+        /// Get a collection of all defined attached properties in this context.
         /// </summary>
         /// <returns></returns>
         public IReadOnlyCollection<AbstractAttachedProperty> GetProperties()
@@ -102,7 +103,8 @@ namespace AttachedProperties
         #region Get Instances
 
         /// <summary>
-        /// 
+        /// Gets a collection of all live instances which has associaated attached property values
+        /// in this context.
         /// </summary>
         /// <returns></returns>
         public IReadOnlyCollection<object> GetInstances()
@@ -119,9 +121,9 @@ namespace AttachedProperties
         #region Get Instance Properties
 
         /// <summary>
-        /// 
+        /// Gets all attached properties and their values for an insatnce in this context.
         /// </summary>
-        /// <param name="instance"></param>
+        /// <param name="instance">The instance which to retrieve attached properties for.</param>
         /// <returns></returns>
         public IReadOnlyDictionary<AbstractAttachedProperty, object> GetInstanceProperties(object instance)
         {
@@ -143,7 +145,7 @@ namespace AttachedProperties
         #region Get Instance Value
 
         /// <summary>
-        /// 
+        /// Get an attached property value from an instance in the global context.
         /// </summary>
         /// <typeparam name="TOwner"></typeparam>
         /// <typeparam name="TProperty"></typeparam>
@@ -177,7 +179,7 @@ namespace AttachedProperties
         #region Set Instance Value
 
         /// <summary>
-        /// 
+        /// Set an attached property value for an instance in the global context.
         /// </summary>
         /// <typeparam name="TOwner"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -210,7 +212,7 @@ namespace AttachedProperties
         #region Global Context
 
         /// <summary>
-        /// 
+        /// An instance of the global context.
         /// </summary>
         public static AttachedPropertyContext GlobalContext = new AttachedPropertyContext();
 
