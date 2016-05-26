@@ -147,10 +147,11 @@ namespace AttachedProperties
         /// <summary>
         /// Get an attached property value from an instance in the global context.
         /// </summary>
-        /// <typeparam name="TOwner"></typeparam>
-        /// <typeparam name="TProperty"></typeparam>
-        /// <param name="instance"></param>
-        /// <param name="attachedProperty"></param>
+        /// <typeparam name="TOwner">Type of the instance which has the associated attached
+        /// property value.</typeparam>
+        /// <typeparam name="TProperty">Type of the attached property value.</typeparam>
+        /// <param name="instance">The instance to retrieve attached property for.</param>
+        /// <param name="attachedProperty">The attached property to get a value for.</param>
         /// <returns></returns>
         public TProperty GetInstanceValue<TOwner, TProperty>(TOwner instance, AttachedProperty<TOwner, TProperty> attachedProperty)
         {
@@ -181,10 +182,11 @@ namespace AttachedProperties
         /// <summary>
         /// Set an attached property value for an instance in the global context.
         /// </summary>
-        /// <typeparam name="TOwner"></typeparam>
-        /// <typeparam name="TResult"></typeparam>
-        /// <param name="instance"></param>
-        /// <param name="attachedProperty"></param>
+        /// <typeparam name="TOwner">Type of the instance which the value will be associated
+        /// with.</typeparam>
+        /// <typeparam name="TProperty">Type of the attached property value.</typeparam>
+        /// <param name="instance">The instance to set attached property for.</param>
+        /// <param name="attachedProperty">The attached property to set a value for.</param>
         /// <returns></returns>
         public void SetInstanceValue<TOwner, TProperty>(TOwner instance, AttachedProperty<TOwner, TProperty> attachedProperty, TProperty value)
         {
