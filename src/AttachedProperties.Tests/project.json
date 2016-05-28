@@ -3,7 +3,9 @@
   "testRunner": "xunit",
   "dependencies": {
     "xunit": "2.1.0",
+    "OpenCover": "4.6.519",
     "dotnet-test-xunit": "1.0.0-rc2-build10015",
+    "coveralls.net": "0.7.0-beta0001",
     "AttachedProperties": "1.1.0-*"
   },
   "frameworks": {
