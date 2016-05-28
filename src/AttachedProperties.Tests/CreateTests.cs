@@ -62,7 +62,7 @@ namespace AttachedProperties.Tests
         [Fact]
         public void ThrowsOnCreateNullContext()
         {
-            var name = typeof(SomeClass).GetTypeInfo().GetProperties().First().Name;
+            var name = typeof(SomeClass).GetProperties().First().Name;
 
             Assert.Throws<ArgumentNullException>("context", () =>
             {
@@ -77,7 +77,7 @@ namespace AttachedProperties.Tests
         public void ThrowsOnCreateExistingProperty()
         {
             var context = new AttachedPropertyContext();
-            var name = typeof(SomeClass).GetTypeInfo().GetProperties().First().Name;
+            var name = typeof(SomeClass).GetProperties().First().Name;
 
             Assert.Throws<ArgumentException>("name", () =>
             {
