@@ -24,35 +24,6 @@ namespace AttachedProperties
     public static class Extensions
     {
 
-        #region Get Attached Properties
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="self"></param>
-        /// <returns></returns>
-        public static IReadOnlyDictionary<AbstractAttachedProperty, object> GetAttachedProperties<T>(this T self)
-        {
-            var attachedProperties = self.GetAttachedProperties(AttachedPropertyContext.GlobalContext);
-            return attachedProperties;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="self"></param>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public static IReadOnlyDictionary<AbstractAttachedProperty, object> GetAttachedProperties<T>(this T self, AttachedPropertyContext context)
-        {
-            var attachedProperties = context.GetInstanceProperties(self);
-            return attachedProperties;
-        }
-
-        #endregion
-
         #region Get Attached Value
 
         /// <summary>
