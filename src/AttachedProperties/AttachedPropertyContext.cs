@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 #endregion
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -155,6 +156,15 @@ namespace AttachedProperties
         /// <returns></returns>
         public TProperty GetInstanceValue<TOwner, TProperty>(TOwner instance, AttachedProperty<TOwner, TProperty> attachedProperty)
         {
+            if(instance == null)
+            {
+                throw new ArgumentNullException(nameof(instance));
+            }
+            if(attachedProperty == null)
+            {
+                throw new ArgumentNullException(nameof(attachedProperty));
+            }
+
             EnsureRegistered(attachedProperty);
             using (new DisposableAction(() => _lock.EnterReadLock(), () => _lock.ExitReadLock()))
             {
@@ -190,6 +200,15 @@ namespace AttachedProperties
         /// <returns></returns>
         public void SetInstanceValue<TOwner, TProperty>(TOwner instance, AttachedProperty<TOwner, TProperty> attachedProperty, TProperty value)
         {
+            if (instance == null)
+            {
+                throw new ArgumentNullException(nameof(instance));
+            }
+            if (attachedProperty == null)
+            {
+                throw new ArgumentNullException(nameof(attachedProperty));
+            }
+
             EnsureRegistered(attachedProperty);
             using (new DisposableAction(() => _lock.EnterWriteLock(), () => _lock.ExitWriteLock()))
             {

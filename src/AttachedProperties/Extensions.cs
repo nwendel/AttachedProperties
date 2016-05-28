@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 #endregion
+using System;
 using System.Collections.Generic;
 
 namespace AttachedProperties
@@ -51,6 +52,11 @@ namespace AttachedProperties
         /// <returns></returns>
         public static TResult GetAttachedValue<T, TResult>(this T self, AttachedProperty<T, TResult> attachedProperty, AttachedPropertyContext context)
         {
+            if(context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             var value = context.GetInstanceValue(self, attachedProperty);
             return value;
         }
@@ -83,6 +89,11 @@ namespace AttachedProperties
         /// <param name="context"></param>
         public static void SetAttachedValue<T, TResult>(this T self, AttachedProperty<T, TResult> attachedProperty, TResult value, AttachedPropertyContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             context.SetInstanceValue(self, attachedProperty, value);
         }
 
