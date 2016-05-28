@@ -100,7 +100,7 @@ namespace AttachedProperties.Tests
             var attachedProperty = new AttachedProperty<object, string>("CanSetAndGet", context);
             object tested = null;
 
-            Assert.Throws<ArgumentNullException>(() => tested.SetAttachedValue(attachedProperty, "asdf", context));
+            Assert.Throws<ArgumentNullException>(() => tested.GetAttachedValue(attachedProperty, context));
         }
 
     }
