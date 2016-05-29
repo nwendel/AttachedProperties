@@ -31,12 +31,12 @@ namespace AttachedProperties
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="TResult"></typeparam>
-        /// <param name="self"></param>
+        /// <param name="instance"></param>
         /// <param name="attachedProperty"></param>
         /// <returns></returns>
-        public static TResult GetAttachedValue<T, TResult>(this T self, AttachedProperty<T, TResult> attachedProperty)
+        public static TResult GetAttachedValue<T, TResult>(this T instance, AttachedProperty<T, TResult> attachedProperty)
         {
-            var value = self.GetAttachedValue(attachedProperty, AttachedPropertyContext.GlobalContext);
+            var value = instance.GetAttachedValue(attachedProperty, AttachedPropertyContext.GlobalContext);
             return value;
         }
 
@@ -45,18 +45,18 @@ namespace AttachedProperties
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="TResult"></typeparam>
-        /// <param name="self"></param>
+        /// <param name="instance"></param>
         /// <param name="attachedProperty"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static TResult GetAttachedValue<T, TResult>(this T self, AttachedProperty<T, TResult> attachedProperty, AttachedPropertyContext context)
+        public static TResult GetAttachedValue<T, TResult>(this T instance, AttachedProperty<T, TResult> attachedProperty, AttachedPropertyContext context)
         {
             if(context == null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
 
-            var value = context.GetInstanceValue(self, attachedProperty);
+            var value = context.GetInstanceValue(instance, attachedProperty);
             return value;
         }
 
@@ -69,12 +69,12 @@ namespace AttachedProperties
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="TResult"></typeparam>
-        /// <param name="self"></param>
+        /// <param name="instance"></param>
         /// <param name="attachedProperty"></param>
         /// <param name="value"></param>
-        public static void SetAttachedValue<T, TResult>(this T self, AttachedProperty<T, TResult> attachedProperty, TResult value)
+        public static void SetAttachedValue<T, TResult>(this T instance, AttachedProperty<T, TResult> attachedProperty, TResult value)
         {
-            self.SetAttachedValue(attachedProperty, value, AttachedPropertyContext.GlobalContext);
+            instance.SetAttachedValue(attachedProperty, value, AttachedPropertyContext.GlobalContext);
         }
 
         /// <summary>
@@ -82,18 +82,18 @@ namespace AttachedProperties
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="TResult"></typeparam>
-        /// <param name="self"></param>
+        /// <param name="instance"></param>
         /// <param name="attachedProperty"></param>
         /// <param name="value"></param>
         /// <param name="context"></param>
-        public static void SetAttachedValue<T, TResult>(this T self, AttachedProperty<T, TResult> attachedProperty, TResult value, AttachedPropertyContext context)
+        public static void SetAttachedValue<T, TResult>(this T instance, AttachedProperty<T, TResult> attachedProperty, TResult value, AttachedPropertyContext context)
         {
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
 
-            context.SetInstanceValue(self, attachedProperty, value);
+            context.SetInstanceValue(instance, attachedProperty, value);
         }
 
         #endregion
