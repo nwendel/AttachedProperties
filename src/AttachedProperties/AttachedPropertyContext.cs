@@ -48,7 +48,7 @@ namespace AttachedProperties
         /// <param name="attachedProperty"></param>
         public void Register(AbstractAttachedProperty attachedProperty)
         {
-            using (new DisposableAction(() => _lock.EnterWriteLock(), () => _lock.ExitWriteLock()))
+            using (WriteLockScope())
             {
                 var fullName = attachedProperty.FullName;
                 if (_attachedProperties.Select(x => x.FullName).Contains(fullName))
@@ -72,7 +72,7 @@ namespace AttachedProperties
         /// <param name="attachedProperty"></param>
         private void EnsureRegistered(AbstractAttachedProperty attachedProperty)
         {
-            using(new DisposableAction(() => _lock.EnterReadLock(), () => _lock.ExitReadLock()))
+            using(ReadLockScope())
             {
                 if (!_attachedProperties.Contains(attachedProperty))
                 {
@@ -93,7 +93,7 @@ namespace AttachedProperties
         /// <returns></returns>
         public IReadOnlyCollection<AbstractAttachedProperty> GetProperties()
         {
-            using (new DisposableAction(() => _lock.EnterReadLock(), () => _lock.ExitReadLock()))
+            using (ReadLockScope())
             {
                 return new ReadOnlyCollection<AbstractAttachedProperty>(_attachedProperties.ToList());
             }
@@ -110,7 +110,7 @@ namespace AttachedProperties
         /// <returns></returns>
         public IReadOnlyCollection<object> GetInstances()
         {
-            using (new DisposableAction(() => _lock.EnterReadLock(), () => _lock.ExitReadLock()))
+            using (ReadLockScope())
             {
                 var keys = (ICollection<object>)_keysProperty.GetValue(_stores);
                 return new ReadOnlyCollection<object>(keys.ToList());
@@ -128,7 +128,7 @@ namespace AttachedProperties
         /// <returns></returns>
         public IReadOnlyDictionary<AbstractAttachedProperty, object> GetInstanceProperties(object instance)
         {
-            using (new DisposableAction(() => _lock.EnterReadLock(), () => _lock.ExitReadLock()))
+            using (ReadLockScope())
             {
                 AttachedPropertyStore store;
                 var found = _stores.TryGetValue(instance, out store);
@@ -166,7 +166,7 @@ namespace AttachedProperties
             }
 
             EnsureRegistered(attachedProperty);
-            using (new DisposableAction(() => _lock.EnterReadLock(), () => _lock.ExitReadLock()))
+            using (ReadLockScope())
             {
                 AttachedPropertyStore store;
                 var found = _stores.TryGetValue(instance, out store);
@@ -210,7 +210,7 @@ namespace AttachedProperties
             }
 
             EnsureRegistered(attachedProperty);
-            using (new DisposableAction(() => _lock.EnterWriteLock(), () => _lock.ExitWriteLock()))
+            using (WriteLockScope())
             {
                 var store = _stores.GetOrCreateValue(instance);
                 if (object.Equals(value, default(TProperty)))
@@ -226,6 +226,28 @@ namespace AttachedProperties
                     store.SetValue(attachedProperty, value);
                 }
             }
+        }
+
+        #endregion
+
+        #region Read / Write Lock Scope
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private IDisposable ReadLockScope()
+        {
+            return new DisposableAction(() => _lock.EnterReadLock(), () => _lock.ExitReadLock());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private IDisposable WriteLockScope()
+        {
+            return new DisposableAction(() => _lock.EnterWriteLock(), () => _lock.ExitWriteLock());
         }
 
         #endregion
