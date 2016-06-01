@@ -50,7 +50,8 @@ namespace AttachedProperties
                 throw new ArgumentNullException(nameof(context));
             }
 
-            var propertyInfo = ownerType.GetProperty(name);
+            var ownerTypeInfo = ownerType.GetTypeInfo();
+            var propertyInfo = ownerTypeInfo.GetProperty(name);
             if (propertyInfo != null)
             {
                 throw new ArgumentException(string.Format("Type {0} already has a property named {1}", ownerType.FullName, name), nameof(name));

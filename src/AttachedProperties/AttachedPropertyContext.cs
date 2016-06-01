@@ -36,7 +36,7 @@ namespace AttachedProperties
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
         private readonly HashSet<AbstractAttachedProperty> _attachedProperties = new HashSet<AbstractAttachedProperty>();
         private readonly ConditionalWeakTable<object, AttachedPropertyStore> _stores = new ConditionalWeakTable<object, AttachedPropertyStore>();
-        private static readonly PropertyInfo _keysProperty = typeof(ConditionalWeakTable<object, AttachedPropertyStore>).GetProperty("Keys", BindingFlags.Instance | BindingFlags.NonPublic);
+        private static readonly PropertyInfo _keysProperty = typeof(ConditionalWeakTable<object, AttachedPropertyStore>).GetTypeInfo().GetProperty("Keys", BindingFlags.Instance | BindingFlags.NonPublic);
 
         #endregion
 
