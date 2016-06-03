@@ -1,5 +1,8 @@
 {
-  "version": "1.1.0-*",
+  "title": "AttachedProperties",
+  "description": "AttachedProperties",
+  "copyright": "Niklas Wendel 2016",
+  "version": "1.2.0-*",
 
   "frameworks": {
     "netstandard1.5": {
@@ -13,7 +16,7 @@
         "System.Runtime": "4.1.0-rc2-24027",
         "System.Threading": "4.0.11-rc2-24027"
       }
-        
+
     },
     "net46": {
       "dependencies": {
@@ -36,7 +39,8 @@
       "type": "git",
       "url": "https://github.com/nwendel/attachedproperties"
     },
-    "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0"
+    "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0",
+    "projectUrl": "https://github.com/nwendel/attachedproperties"
   },
 
   "authors": [ "Niklas Wendel" ]
