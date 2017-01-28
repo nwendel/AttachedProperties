@@ -2,18 +2,18 @@
   "version": "1.0.0-*",
   "testRunner": "xunit",
   "dependencies": {
-    "xunit": "2.1.0",
+    "xunit": "2.2.0-beta6-build3477",
     "OpenCover": "4.6.519",
-    "dotnet-test-xunit": "1.0.0-rc2-build10015",
-    "coveralls.net": "0.7.0-beta0001",
-    "AttachedProperties": "1.2.0-*"
+    "dotnet-test-xunit": "2.2.0-preview3-build1047",
+    "coveralls.net": "0.8.0-unstable0013",
+    "AttachedProperties": "1.3.0-*"
   },
   "frameworks": {
-    "netcoreapp1.0": {
+    "netcoreapp1.1": {
       "dependencies": {
         "Microsoft.NETCore.App": {
           "type": "platform",
-          "version": "1.0.0-rc2-3002702"
+          "version": "1.0.1"
         }
       },
       "imports": [
