@@ -2,7 +2,7 @@
   "version": "1.0.0-*",
   "testRunner": "xunit",
   "dependencies": {
-    "xunit": "2.2.0-beta6-build3477",
+    "xunit": "2.1.0",
     "OpenCover": "4.6.519",
     "dotnet-test-xunit": "2.2.0-preview3-build1047",
     "coveralls.net": "0.8.0-unstable0013",
