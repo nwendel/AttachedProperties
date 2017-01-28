@@ -4,6 +4,10 @@
   "copyright": "Niklas Wendel 2016-2017",
   "version": "1.4.0-*",
 
+  "buildOptions": {
+    "warningsAsErrors": true
+  },
+
   "frameworks": {
     "netstandard1.5": {
       "dependencies": {
