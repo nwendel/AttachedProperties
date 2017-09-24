@@ -1,5 +1,5 @@
 ﻿#region License
-// Copyright (c) Niklas Wendel 2016
+// Copyright (c) Niklas Wendel 2016-2017
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); 
 // you may not use this file except in compliance with the License. 
@@ -17,7 +17,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace AttachedProperties
+namespace AttachedProperties.Internal
 {
 
     /// <summary>
@@ -28,7 +28,7 @@ namespace AttachedProperties
 
         #region Fields
 
-        private ConcurrentDictionary<AbstractAttachedProperty, object> _values = new ConcurrentDictionary<AbstractAttachedProperty, object>();
+        private readonly ConcurrentDictionary<AbstractAttachedProperty, object> _values = new ConcurrentDictionary<AbstractAttachedProperty, object>();
 
         #endregion
 
@@ -55,8 +55,8 @@ namespace AttachedProperties
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="instance"></param>
         /// <param name="attachedProperty"></param>
+        /// <param name="value"></param>
         /// <returns></returns>
         public bool TryGetValue(AbstractAttachedProperty attachedProperty, out object value)
         {
@@ -71,7 +71,6 @@ namespace AttachedProperties
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="instance"></param>
         /// <param name="attachedProperty"></param>
         /// <param name="value"></param>
         public void SetValue(AbstractAttachedProperty attachedProperty, object value)
@@ -89,8 +88,7 @@ namespace AttachedProperties
         /// <param name="attachedProperty"></param>
         public void RemoveValue(AbstractAttachedProperty attachedProperty)
         {
-            object _;
-            _values.TryRemove(attachedProperty, out _);
+            _values.TryRemove(attachedProperty, out var _);
         }
 
         #endregion

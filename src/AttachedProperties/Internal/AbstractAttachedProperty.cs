@@ -1,5 +1,5 @@
 #region License
-// Copyright (c) Niklas Wendel 2016
+// Copyright (c) Niklas Wendel 2016-2017
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); 
 // you may not use this file except in compliance with the License. 
@@ -16,7 +16,7 @@
 using System;
 using System.Reflection;
 
-namespace AttachedProperties
+namespace AttachedProperties.Internal
 {
 
     /// <summary>
@@ -24,15 +24,6 @@ namespace AttachedProperties
     /// </summary>
     public abstract class AbstractAttachedProperty
     {
-
-        #region Fields
-
-        private readonly Type _ownerType;
-        private readonly Type _propertyType;
-        private readonly string _name;
-        private readonly string _fullName;
-
-        #endregion
 
         #region Constructor
 
@@ -50,16 +41,15 @@ namespace AttachedProperties
                 throw new ArgumentNullException(nameof(context));
             }
 
-            var ownerTypeInfo = ownerType.GetTypeInfo();
-            var propertyInfo = ownerTypeInfo.GetProperty(name);
+            var propertyInfo = ownerType.GetRuntimeProperty(name);
             if (propertyInfo != null)
             {
                 throw new ArgumentException(string.Format("Type {0} already has a property named {1}", ownerType.FullName, name), nameof(name));
             }
 
-            _ownerType = ownerType;
-            _propertyType = propertyType;
-            _name = name;
+            OwnerType = ownerType;
+            PropertyType = propertyType;
+            Name = name;
 
             context.Register(this);
         }
@@ -71,22 +61,22 @@ namespace AttachedProperties
         /// <summary>
         /// 
         /// </summary>
-        public Type OwnerType => _ownerType;
+        public Type OwnerType { get; }
 
         /// <summary>
         /// 
         /// </summary>
-        public Type PropertyType => _propertyType;
+        public Type PropertyType { get; }
 
         /// <summary>
         /// 
         /// </summary>
-        public string Name => _name;
+        public string Name { get; }
 
         /// <summary>
         /// 
         /// </summary>
-        public string FullName => string.Format("{0}.{1}", _ownerType.FullName, _name);
+        public string FullName => string.Format("{0}.{1}", OwnerType.FullName, Name);
 
         #endregion
 

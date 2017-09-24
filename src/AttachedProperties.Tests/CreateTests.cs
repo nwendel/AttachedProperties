@@ -1,5 +1,5 @@
 ﻿#region License
-// Copyright (c) Niklas Wendel 2016
+// Copyright (c) Niklas Wendel 2016-2017
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); 
 // you may not use this file except in compliance with the License. 
@@ -15,9 +15,8 @@
 #endregion
 using System;
 using System.Linq;
-using System.Reflection;
 using Xunit;
-using AttachedProperties.Tests.TestClasses;
+using AttachedProperties.Tests.Classes;
 
 namespace AttachedProperties.Tests
 {
@@ -50,10 +49,7 @@ namespace AttachedProperties.Tests
         {
             var context = new AttachedPropertyContext();
 
-            Assert.Throws<ArgumentNullException>("name", () =>
-            {
-                var tested = new AttachedProperty<object, object>(null, context);
-            });
+            Assert.Throws<ArgumentNullException>("name", () => new AttachedProperty<object, object>(null, context));
         }
 
         /// <summary>
@@ -64,10 +60,7 @@ namespace AttachedProperties.Tests
         {
             var name = typeof(SomeClass).GetProperties().First().Name;
 
-            Assert.Throws<ArgumentNullException>("context", () =>
-            {
-                var tested = new AttachedProperty<SomeClass, object>(name, null);
-            });
+            Assert.Throws<ArgumentNullException>("context", () => new AttachedProperty<SomeClass, object>(name, null));
         }
 
         /// <summary>
@@ -79,10 +72,7 @@ namespace AttachedProperties.Tests
             var context = new AttachedPropertyContext();
             var name = typeof(SomeClass).GetProperties().First().Name;
 
-            Assert.Throws<ArgumentException>("name", () =>
-            {
-                var tested = new AttachedProperty<SomeClass, object>(name, context);
-            });
+            Assert.Throws<ArgumentException>("name", () => new AttachedProperty<SomeClass, object>(name, context));
         }
 
         /// <summary>
@@ -94,10 +84,9 @@ namespace AttachedProperties.Tests
             var context = new AttachedPropertyContext();
 
             var first = new AttachedProperty<object, int>("asdf", context);
-            Assert.Throws<AttachedPropertyException>(() =>
-            {
-                var _ = new AttachedProperty<object, int>("asdf", context);
-            });
+
+            Assert.NotNull(first);
+            Assert.Throws<AttachedPropertyException>(() => new AttachedProperty<object, int>("asdf", context));
         }
 
         /// <summary>

@@ -1,5 +1,5 @@
 ﻿#region License
-// Copyright (c) Niklas Wendel 2016
+// Copyright (c) Niklas Wendel 2016-2017
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); 
 // you may not use this file except in compliance with the License. 
@@ -32,10 +32,9 @@ namespace AttachedProperties.Tests
         public void ThrowsOnSetNullAttachedProperty()
         {
             var context = new AttachedPropertyContext();
-            AttachedProperty<object, string> attachedProperty = null;
             var tested = new object();
 
-            Assert.Throws<ArgumentNullException>(() => tested.SetAttachedValue(attachedProperty, "asdf", context));
+            Assert.Throws<ArgumentNullException>(() => tested.SetAttachedValue(null, "asdf", context));
         }
 
         /// <summary>
@@ -71,10 +70,9 @@ namespace AttachedProperties.Tests
         public void ThrowsOnGetNullAttachedProperty()
         {
             var context = new AttachedPropertyContext();
-            AttachedProperty<object, string> attachedProperty = null;
             var tested = new object();
 
-            Assert.Throws<ArgumentNullException>(() => tested.GetAttachedValue(attachedProperty, context));
+            Assert.Throws<ArgumentNullException>(() => tested.GetAttachedValue((AttachedProperty<object, string>) null, context));
         }
 
         /// <summary>

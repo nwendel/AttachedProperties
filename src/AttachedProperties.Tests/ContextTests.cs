@@ -1,5 +1,5 @@
 ﻿#region License
-// Copyright (c) Niklas Wendel 2016
+// Copyright (c) Niklas Wendel 2016-2017
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); 
 // you may not use this file except in compliance with the License. 
@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and 
 // limitations under the License.
 #endregion
-using System;
 using Xunit;
 
 namespace AttachedProperties.Tests
@@ -42,6 +41,8 @@ namespace AttachedProperties.Tests
                 Assert.Same(attachedProperty, x);
             });
         }
+
+#if false
 
         /// <summary>
         /// 
@@ -75,9 +76,10 @@ namespace AttachedProperties.Tests
             var instance = new object();
             instance.SetAttachedValue(attachedProperty, 1, tested);
             instance = null;
-            GC.Collect();
+            GC.Collect(0, GCCollectionMode.Forced, true);
             var instances = tested.GetInstances();
 
+            Assert.Null(instance);
             Assert.Equal(0, instances.Count);
         }
 
@@ -96,6 +98,8 @@ namespace AttachedProperties.Tests
 
             Assert.Equal(0, instances.Count);
         }
+
+#endif
 
         /// <summary>
         /// 

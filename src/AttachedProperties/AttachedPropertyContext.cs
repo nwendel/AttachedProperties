@@ -1,5 +1,5 @@
 #region License
-// Copyright (c) Niklas Wendel 2016
+// Copyright (c) Niklas Wendel 2016-2017
 // 
 // Licensed under the Apache License, Version 2.0 (the "License"); 
 // you may not use this file except in compliance with the License. 
@@ -17,9 +17,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using AttachedProperties.Internal;
 
 namespace AttachedProperties
 {
@@ -36,7 +36,10 @@ namespace AttachedProperties
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
         private readonly HashSet<AbstractAttachedProperty> _attachedProperties = new HashSet<AbstractAttachedProperty>();
         private readonly ConditionalWeakTable<object, AttachedPropertyStore> _stores = new ConditionalWeakTable<object, AttachedPropertyStore>();
-        private static readonly PropertyInfo _keysProperty = typeof(ConditionalWeakTable<object, AttachedPropertyStore>).GetTypeInfo().GetProperty("Keys", BindingFlags.Instance | BindingFlags.NonPublic);
+
+#if false
+        private static readonly PropertyInfo _keysProperty = typeof(ConditionalWeakTable<object, AttachedPropertyStore>).GetTypeInfo().GetDeclaredProperty("Keys");
+#endif
 
         #endregion
 
@@ -103,6 +106,8 @@ namespace AttachedProperties
 
         #region Get Instances
 
+#if false
+
         /// <summary>
         /// Gets a collection of all live instances which has associaated attached property values
         /// in this context.
@@ -117,6 +122,8 @@ namespace AttachedProperties
             }
         }
 
+#endif
+
         #endregion
 
         #region Get Instance Properties
@@ -130,14 +137,10 @@ namespace AttachedProperties
         {
             using (ReadLockScope())
             {
-                AttachedPropertyStore store;
-                var found = _stores.TryGetValue(instance, out store);
-                if (!found)
-                {
-                    return new Dictionary<AbstractAttachedProperty, object>();
-                }
-
-                return store.Values;
+                var found = _stores.TryGetValue(instance, out var store);
+                return found
+                    ? store.Values
+                    : new Dictionary<AbstractAttachedProperty, object>();
             }
         }
 
@@ -168,15 +171,13 @@ namespace AttachedProperties
             EnsureRegistered(attachedProperty);
             using (ReadLockScope())
             {
-                AttachedPropertyStore store;
-                var found = _stores.TryGetValue(instance, out store);
+                var found = _stores.TryGetValue(instance, out var store);
                 if (!found)
                 {
                     return default(TProperty);
                 }
 
-                object value;
-                found = store.TryGetValue(attachedProperty, out value);
+                found = store.TryGetValue(attachedProperty, out var value);
                 if(!found)
                 {
                     return default(TProperty);
@@ -197,6 +198,7 @@ namespace AttachedProperties
         /// <typeparam name="TProperty">Type of the attached property value.</typeparam>
         /// <param name="instance">The instance to set attached property for.</param>
         /// <param name="attachedProperty">The attached property to set a value for.</param>
+        /// <param name="value"></param>
         /// <returns></returns>
         public void SetInstanceValue<TOwner, TProperty>(TOwner instance, AttachedProperty<TOwner, TProperty> attachedProperty, TProperty value)
         {
@@ -213,7 +215,7 @@ namespace AttachedProperties
             using (WriteLockScope())
             {
                 var store = _stores.GetOrCreateValue(instance);
-                if (object.Equals(value, default(TProperty)))
+                if (Equals(value, default(TProperty)))
                 {
                     store.RemoveValue(attachedProperty);
                     if(store.Count == 0)
@@ -257,7 +259,7 @@ namespace AttachedProperties
         /// <summary>
         /// An instance of the global context.
         /// </summary>
-        public static AttachedPropertyContext GlobalContext = new AttachedPropertyContext();
+        public static readonly AttachedPropertyContext GlobalContext = new AttachedPropertyContext();
 
         #endregion
 
