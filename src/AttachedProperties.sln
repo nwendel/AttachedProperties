@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AttachedProperties", "AttachedProperties\AttachedProperties.csproj", "{664DD879-2AA1-4CE7-B2B1-0651741524A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttachedProperties.Tests", "AttachedProperties.Tests\AttachedProperties.Tests.csproj", "{014D41D9-C354-4316-9B10-F1BAFBEC9210}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AttachedProperties.Tests", "AttachedProperties.Tests\AttachedProperties.Tests.csproj", "{014D41D9-C354-4316-9B10-F1BAFBEC9210}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F8EE7DDE-CBD0-40A7-8D50-CF727D73583F}"
+	ProjectSection(SolutionItems) = preProject
+		..\LICENSE.txt = ..\LICENSE.txt
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
