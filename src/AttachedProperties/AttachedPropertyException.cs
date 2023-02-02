@@ -1,26 +1,9 @@
-﻿using System;
+﻿namespace AttachedProperties;
 
-namespace AttachedProperties
+public class AttachedPropertyException : Exception
 {
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class AttachedPropertyException : Exception
+    public AttachedPropertyException(string message)
+        : base(message)
     {
-
-        #region Constructor
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="message"></param>
-        public AttachedPropertyException(string message) : base(message)
-        {
-        }
-
-        #endregion
-
     }
-
 }

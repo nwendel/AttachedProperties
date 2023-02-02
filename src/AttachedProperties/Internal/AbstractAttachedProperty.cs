@@ -1,70 +1,44 @@
-using System;
-using System.Reflection;
+﻿using System.Reflection;
 
-namespace AttachedProperties.Internal
+namespace AttachedProperties.Internal;
+
+public abstract class AbstractAttachedProperty
 {
-
-    /// <summary>
-    /// Abstract base class used to define <see cref="AttachedProperties"/>.
-    /// </summary>
-    public abstract class AbstractAttachedProperty
+    protected AbstractAttachedProperty(Type ownerType, Type propertyType, string name, AttachedPropertyContext context)
     {
-
-        #region Constructor
-
-        /// <summary>
-        /// 
-        /// </summary>
-        protected AbstractAttachedProperty(Type ownerType, Type propertyType, string name, AttachedPropertyContext context)
+        if (ownerType == null)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            var propertyInfo = ownerType.GetRuntimeProperty(name);
-            if (propertyInfo != null)
-            {
-                throw new ArgumentException(string.Format("Type {0} already has a property named {1}", ownerType.FullName, name), nameof(name));
-            }
-
-            OwnerType = ownerType;
-            PropertyType = propertyType;
-            Name = name;
-
-            context.Register(this);
+            throw new ArgumentNullException(nameof(ownerType));
         }
 
-        #endregion
+        if (name == null)
+        {
+            throw new ArgumentNullException(nameof(name));
+        }
 
-        #region Properties
+        if (context == null)
+        {
+            throw new ArgumentNullException(nameof(context));
+        }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public Type OwnerType { get; }
+        var propertyInfo = ownerType.GetRuntimeProperty(name);
+        if (propertyInfo != null)
+        {
+            throw new ArgumentException($"Type {ownerType.FullName} already has a property named {name}", nameof(name));
+        }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public Type PropertyType { get; }
+        OwnerType = ownerType;
+        PropertyType = propertyType;
+        Name = name;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Name { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string FullName => string.Format("{0}.{1}", OwnerType.FullName, Name);
-
-        #endregion
-
+        context.Register(this);
     }
 
+    public Type OwnerType { get; }
+
+    public Type PropertyType { get; }
+
+    public string Name { get; }
+
+    public string FullName => $"{OwnerType.FullName}.{Name}";
 }
