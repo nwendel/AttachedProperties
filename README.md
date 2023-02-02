@@ -1,4 +1,4 @@
-# AttachedProperties ![Build](https://github.com/nwendel/attachedproperties/actions/workflows/build.yml/badge.svg) [![Coverage](https://codecov.io/gh/nwendel/personidentifiersattachedproperties/branch/main/graph/badge.svg?token=BMNOSIWUMV)](https://codecov.io/gh/nwendel/attachedproperties)
+# AttachedProperties ![Build](https://github.com/nwendel/attachedproperties/actions/workflows/build.yml/badge.svg) [![Coverage](https://codecov.io/gh/nwendel/attachedproperties/branch/main/graph/badge.svg?token=BMNOSIWUMV)](https://codecov.io/gh/nwendel/attachedproperties)
 
 A small library for dynamically adding attached properties to any existing instance without creating a derived type.  It works similar in nature to WPF's attached dependency properties however it can be used on any type and not just types deriving from DependencyObject.
 
