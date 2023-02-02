@@ -1,18 +1,3 @@
-#region License
-// Copyright (c) Niklas Wendel 2016-2017
-// 
-// Licensed under the Apache License, Version 2.0 (the "License"); 
-// you may not use this file except in compliance with the License. 
-// You may obtain a copy of the License at 
-// 
-// http://www.apache.org/licenses/LICENSE-2.0 
-// 
-// Unless required by applicable law or agreed to in writing, software 
-// distributed under the License is distributed on an "AS IS" BASIS, 
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
-// See the License for the specific language governing permissions and 
-// limitations under the License.
-#endregion
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -75,7 +60,7 @@ namespace AttachedProperties
         /// <param name="attachedProperty"></param>
         private void EnsureRegistered(AbstractAttachedProperty attachedProperty)
         {
-            using(ReadLockScope())
+            using (ReadLockScope())
             {
                 if (!_attachedProperties.Contains(attachedProperty))
                 {
@@ -159,11 +144,11 @@ namespace AttachedProperties
         /// <returns></returns>
         public TProperty GetInstanceValue<TOwner, TProperty>(TOwner instance, AttachedProperty<TOwner, TProperty> attachedProperty)
         {
-            if(instance == null)
+            if (instance == null)
             {
                 throw new ArgumentNullException(nameof(instance));
             }
-            if(attachedProperty == null)
+            if (attachedProperty == null)
             {
                 throw new ArgumentNullException(nameof(attachedProperty));
             }
@@ -178,7 +163,7 @@ namespace AttachedProperties
                 }
 
                 found = store.TryGetValue(attachedProperty, out var value);
-                if(!found)
+                if (!found)
                 {
                     return default(TProperty);
                 }
@@ -218,7 +203,7 @@ namespace AttachedProperties
                 if (Equals(value, default(TProperty)))
                 {
                     store.RemoveValue(attachedProperty);
-                    if(store.Count == 0)
+                    if (store.Count == 0)
                     {
                         _stores.Remove(instance);
                     }
