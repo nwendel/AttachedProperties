@@ -1,17 +1,6 @@
-﻿namespace AttachedProperties.Tests.Classes
+﻿namespace AttachedProperties.Tests.Classes;
+
+public class SomeClass
 {
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class SomeClass
-    {
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string SomeProperty { get; set; }
-
-    }
-
+    public string? SomeProperty { get; set; }
 }

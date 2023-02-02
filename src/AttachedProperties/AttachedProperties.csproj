@@ -1,20 +1,47 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6</TargetFramework>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	  <TargetFramework>net7.0</TargetFramework>
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <Nullable>enable</Nullable>
+	  <EnableNETAnalyzers>true</EnableNETAnalyzers>
+	  <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+	  <EnableCodeStyleInBuild>true</EnableCodeStyleInBuild>
+	  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup>
     <PackageId>AttachedProperties</PackageId>
     <Title>AttachedProperties</Title>
     <Description>AttachedProperties</Description>
-    <Version>2.1.0</Version>
-    <Copyright>Niklas Wendel 2016-2022</Copyright>
+	<Version>2.2.0</Version>
+    <Copyright>Niklas Wendel 2016-2023</Copyright>
     <Authors>Niklas Wendel</Authors>
     <PackageTags>Attached;Properties;Property;AttachedProperties;AttachedProperty</PackageTags>
     <PackageProjectUrl>https://github.com/nwendel/attachedproperties</PackageProjectUrl>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression> 
+	<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/nwendel/ConventionAssertions</RepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+	<AdditionalFiles Include="..\stylecop.json" Link="stylecop.json" />
+	<None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+	  <PrivateAssets>all</PrivateAssets>
+	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+	<PackageReference Include="StyleCop.Analyzers.Unstable" Version="1.2.0.435">
+	  <PrivateAssets>all</PrivateAssets>
+	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+  </ItemGroup>
 
 </Project>

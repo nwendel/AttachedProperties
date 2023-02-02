@@ -1,47 +1,17 @@
-﻿using System;
+﻿namespace AttachedProperties.Internal;
 
-namespace AttachedProperties.Internal
+internal sealed class DisposableAction : IDisposable
 {
+    private readonly Action _disposableAction;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    internal sealed class DisposableAction : IDisposable
+    internal DisposableAction(Action action, Action disposableAction)
     {
-
-        #region Fields
-
-        private readonly Action _disposableAction;
-
-        #endregion
-
-        #region Constructor
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="action"></param>
-        /// <param name="disposableAction"></param>
-        internal DisposableAction(Action action, Action disposableAction)
-        {
-            action();
-            _disposableAction = disposableAction;
-        }
-
-        #endregion
-
-        #region Dispose
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void Dispose()
-        {
-            _disposableAction();
-        }
-
-        #endregion
-
+        action();
+        _disposableAction = disposableAction;
     }
 
+    public void Dispose()
+    {
+        _disposableAction();
+    }
 }
