@@ -15,7 +15,7 @@ public sealed class AttachedPropertyContext : IDisposable
     public static readonly AttachedPropertyContext GlobalContext = new();
 
     private readonly ReaderWriterLockSlim _lock = new();
-    private readonly HashSet<AbstractAttachedProperty> _attachedProperties = new();
+    private readonly HashSet<AttachedPropertyBase> _attachedProperties = new();
     private readonly ConditionalWeakTable<object, AttachedPropertyStore> _stores = new();
 
 #if false
@@ -25,7 +25,7 @@ public sealed class AttachedPropertyContext : IDisposable
     /// <summary>
     /// Register a new attached property in this context.
     /// </summary>
-    public void Register(AbstractAttachedProperty attachedProperty)
+    public void Register(AttachedPropertyBase attachedProperty)
     {
         GuardAgainst.Null(attachedProperty);
 
@@ -44,11 +44,11 @@ public sealed class AttachedPropertyContext : IDisposable
     /// <summary>
     /// Get a collection of all defined attached properties in this context.
     /// </summary>
-    public IReadOnlyCollection<AbstractAttachedProperty> GetProperties()
+    public IReadOnlyCollection<AttachedPropertyBase> GetProperties()
     {
         using (ReadLockScope())
         {
-            return new ReadOnlyCollection<AbstractAttachedProperty>(_attachedProperties.ToList());
+            return new ReadOnlyCollection<AttachedPropertyBase>(_attachedProperties.ToList());
         }
     }
 
@@ -74,13 +74,13 @@ public sealed class AttachedPropertyContext : IDisposable
     /// Gets all attached properties and their values for an insatnce in this context.
     /// </summary>
     /// <param name="instance">The instance which to retrieve attached properties for.</param>
-    public IReadOnlyDictionary<AbstractAttachedProperty, object?> GetInstanceProperties(object instance)
+    public IReadOnlyDictionary<AttachedPropertyBase, object?> GetInstanceProperties(object instance)
     {
         using (ReadLockScope())
         {
             return _stores.TryGetValue(instance, out var store)
                 ? store.Values
-                : new Dictionary<AbstractAttachedProperty, object?>();
+                : new Dictionary<AttachedPropertyBase, object?>();
         }
     }
 
@@ -154,7 +154,7 @@ public sealed class AttachedPropertyContext : IDisposable
         _lock.Dispose();
     }
 
-    private void EnsureRegistered(AbstractAttachedProperty attachedProperty)
+    private void EnsureRegistered(AttachedPropertyBase attachedProperty)
     {
         using (ReadLockScope())
         {

@@ -6,6 +6,8 @@ internal sealed class DisposeAction : IDisposable
 
     public DisposeAction(Action disposeAction)
     {
+        GuardAgainst.Null(disposeAction);
+
         _disposeAction = disposeAction;
     }
 

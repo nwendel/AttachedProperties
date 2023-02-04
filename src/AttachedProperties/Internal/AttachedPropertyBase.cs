@@ -2,9 +2,9 @@
 
 namespace AttachedProperties.Internal;
 
-public abstract class AbstractAttachedProperty
+public abstract class AttachedPropertyBase
 {
-    protected AbstractAttachedProperty(Type ownerType, Type propertyType, string name, AttachedPropertyContext context)
+    protected AttachedPropertyBase(Type ownerType, Type propertyType, string name, AttachedPropertyContext context)
     {
         GuardAgainst.Null(ownerType);
         GuardAgainst.NullOrWhiteSpace(name);

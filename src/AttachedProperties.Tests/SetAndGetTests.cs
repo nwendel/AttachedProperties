@@ -24,7 +24,7 @@ public class SetAndGetTests
 
         var value = tested.GetAttachedValue(attachedProperty, context);
 
-        Assert.Equal(default(string), value);
+        Assert.Null(value);
     }
 
     [Fact]
@@ -34,7 +34,7 @@ public class SetAndGetTests
 
         var attachedProperty = new AttachedProperty<object, string>("CanGetDefaultWithoutSet", tested);
         var instance = new object();
-        instance.SetAttachedValue(attachedProperty, default, tested);
+        instance.SetAttachedValue(attachedProperty, null, tested);
         var properties = tested.GetInstanceProperties(instance);
 
         Assert.Equal(0, properties.Count);
@@ -48,7 +48,7 @@ public class SetAndGetTests
         var attachedProperty = new AttachedProperty<object, string>("CanGetDefaultWithoutSet", tested);
         var instance = new object();
         instance.SetAttachedValue(attachedProperty, "asdf", tested);
-        instance.SetAttachedValue(attachedProperty, default(string), tested);
+        instance.SetAttachedValue(attachedProperty, null, tested);
         var properties = tested.GetInstanceProperties(instance);
 
         Assert.Equal(0, properties.Count);

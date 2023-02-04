@@ -2,13 +2,13 @@
 
 public class AttachedPropertyStore
 {
-    private readonly ConcurrentDictionary<AbstractAttachedProperty, object?> _values = new();
+    private readonly ConcurrentDictionary<AttachedPropertyBase, object?> _values = new();
 
     public int Count => _values.Count;
 
-    public IReadOnlyDictionary<AbstractAttachedProperty, object?> Values => new ReadOnlyDictionary<AbstractAttachedProperty, object?>(_values);
+    public IReadOnlyDictionary<AttachedPropertyBase, object?> Values => new ReadOnlyDictionary<AttachedPropertyBase, object?>(_values);
 
-    public bool TryGetValue(AbstractAttachedProperty attachedProperty, [NotNullWhen(true)] out object? value)
+    public bool TryGetValue(AttachedPropertyBase attachedProperty, [NotNullWhen(true)] out object? value)
     {
         GuardAgainst.Null(attachedProperty);
 
@@ -16,14 +16,14 @@ public class AttachedPropertyStore
         return found;
     }
 
-    public void SetValue(AbstractAttachedProperty attachedProperty, object? value)
+    public void SetValue(AttachedPropertyBase attachedProperty, object? value)
     {
         GuardAgainst.Null(attachedProperty);
 
         _values[attachedProperty] = value;
     }
 
-    public void RemoveValue(AbstractAttachedProperty attachedProperty)
+    public void RemoveValue(AttachedPropertyBase attachedProperty)
     {
         GuardAgainst.Null(attachedProperty);
 
