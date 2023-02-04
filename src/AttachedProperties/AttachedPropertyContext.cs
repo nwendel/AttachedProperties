@@ -169,11 +169,13 @@ public sealed class AttachedPropertyContext : IDisposable
 
     private IDisposable ReadLockScope()
     {
-        return new DisposableAction(() => _lock.EnterReadLock(), () => _lock.ExitReadLock());
+        _lock.EnterReadLock();
+        return new DisposeAction(_lock.ExitReadLock);
     }
 
     private IDisposable WriteLockScope()
     {
-        return new DisposableAction(() => _lock.EnterWriteLock(), () => _lock.ExitWriteLock());
+        _lock.EnterWriteLock();
+        return new DisposeAction(_lock.ExitWriteLock);
     }
 }
