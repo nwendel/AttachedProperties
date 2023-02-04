@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
+using AttachedProperties.Infrastructure;
 
 namespace AttachedProperties.Internal;
 
@@ -14,17 +15,23 @@ public class AttachedPropertyStore
 
     public bool TryGetValue(AbstractAttachedProperty attachedProperty, [NotNullWhen(true)] out object? value)
     {
+        GuardAgainst.Null(attachedProperty);
+
         var found = _values.TryGetValue(attachedProperty, out value);
         return found;
     }
 
     public void SetValue(AbstractAttachedProperty attachedProperty, object? value)
     {
+        GuardAgainst.Null(attachedProperty);
+
         _values[attachedProperty] = value;
     }
 
     public void RemoveValue(AbstractAttachedProperty attachedProperty)
     {
+        GuardAgainst.Null(attachedProperty);
+
         _values.TryRemove(attachedProperty, out var _);
     }
 }
