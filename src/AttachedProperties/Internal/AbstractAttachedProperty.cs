@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using AttachedProperties.Infrastructure;
 
 namespace AttachedProperties.Internal;
 

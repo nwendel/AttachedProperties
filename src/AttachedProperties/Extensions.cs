@@ -1,6 +1,4 @@
-﻿using AttachedProperties.Infrastructure;
-
-namespace AttachedProperties;
+﻿namespace AttachedProperties;
 
 public static class Extensions
 {

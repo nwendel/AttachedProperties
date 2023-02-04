@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
-using AttachedProperties.Infrastructure;
+﻿using System.Runtime.CompilerServices;
 using AttachedProperties.Internal;
 
 namespace AttachedProperties;
