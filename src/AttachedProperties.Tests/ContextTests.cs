@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace AttachedProperties.Tests;
+﻿namespace AttachedProperties.Tests;
 
 public class ContextTests
 {

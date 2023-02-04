@@ -1,5 +1,4 @@
 ﻿using AttachedProperties.Tests.Classes;
-using Xunit;
 
 namespace AttachedProperties.Tests;
 
