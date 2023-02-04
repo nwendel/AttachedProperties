@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using AttachedProperties.Infrastructure;
 
 namespace AttachedProperties.Internal;
 
@@ -6,20 +7,9 @@ public abstract class AbstractAttachedProperty
 {
     protected AbstractAttachedProperty(Type ownerType, Type propertyType, string name, AttachedPropertyContext context)
     {
-        if (ownerType == null)
-        {
-            throw new ArgumentNullException(nameof(ownerType));
-        }
-
-        if (name == null)
-        {
-            throw new ArgumentNullException(nameof(name));
-        }
-
-        if (context == null)
-        {
-            throw new ArgumentNullException(nameof(context));
-        }
+        GuardAgainst.Null(ownerType);
+        GuardAgainst.NullOrWhiteSpace(name);
+        GuardAgainst.Null(context);
 
         var propertyInfo = ownerType.GetRuntimeProperty(name);
         if (propertyInfo != null)

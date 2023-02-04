@@ -29,10 +29,7 @@ public sealed class AttachedPropertyContext : IDisposable
     /// </summary>
     public void Register(AbstractAttachedProperty attachedProperty)
     {
-        if (attachedProperty == null)
-        {
-            throw new ArgumentNullException(nameof(attachedProperty));
-        }
+        GuardAgainst.Null(attachedProperty);
 
         using (WriteLockScope())
         {
@@ -98,16 +95,10 @@ public sealed class AttachedPropertyContext : IDisposable
     /// <param name="instance">The instance to retrieve attached property for.</param>
     /// <param name="attachedProperty">The attached property to get a value for.</param>
     public TProperty? GetInstanceValue<TOwner, TProperty>(TOwner instance, AttachedProperty<TOwner, TProperty> attachedProperty)
+        where TOwner : class
     {
-        if (instance == null)
-        {
-            throw new ArgumentNullException(nameof(instance));
-        }
-
-        if (attachedProperty == null)
-        {
-            throw new ArgumentNullException(nameof(attachedProperty));
-        }
+        GuardAgainst.Null(instance);
+        GuardAgainst.Null(attachedProperty);
 
         EnsureRegistered(attachedProperty);
         using (ReadLockScope())
@@ -136,16 +127,10 @@ public sealed class AttachedPropertyContext : IDisposable
     /// <param name="attachedProperty">The attached property to set a value for.</param>
     /// <param name="value">The value.</param>
     public void SetInstanceValue<TOwner, TProperty>(TOwner instance, AttachedProperty<TOwner, TProperty> attachedProperty, TProperty? value)
+        where TOwner : class
     {
-        if (instance == null)
-        {
-            throw new ArgumentNullException(nameof(instance));
-        }
-
-        if (attachedProperty == null)
-        {
-            throw new ArgumentNullException(nameof(attachedProperty));
-        }
+        GuardAgainst.Null(instance);
+        GuardAgainst.Null(attachedProperty);
 
         EnsureRegistered(attachedProperty);
         using (WriteLockScope())
